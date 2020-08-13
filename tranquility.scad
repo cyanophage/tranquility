@@ -52,7 +52,8 @@ reardip=4;  // same at back
 screw=6.1;
 
 rotation_point = [0,0,bigR];
-rot_point2 = [0,-30,2.7];
+rot2 = 5; // how much the top is tilted forward
+rot_point2 = [0,-30,2.7]; // the point forward tilt is around
 
 
 module elitec() {
@@ -100,9 +101,9 @@ module caddy1() {
     intersection() {
       color("limegreen")hull() {
        // top left 
-       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // top right
-       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom left
        translate([-10,reary,baseline]) cube([cubex, 1, th],true);
        // bottom right
@@ -152,9 +153,9 @@ module caddy1() {
     }
     hull() {
        // top left 
-       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // top right
-       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom left
        translate([-10,reary,baseline]) cube([cubex, 1, th],true);
        // bottom right
@@ -169,9 +170,9 @@ module caddy1_v4() {
     intersection() {
       color("limegreen")hull() {
        // top left 
-       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // top right
-       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom left
        translate([-10,reary,baseline]) cube([cubex, 1, th],true);
        // bottom right
@@ -222,9 +223,9 @@ module caddy1_v4() {
     // backplate 
     hull() {
        // top left 
-       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([-10,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // top right
-       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+       translate([30,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom left
        translate([-10,reary,baseline]) cube([cubex, 1, th],true);
        // bottom right
@@ -242,9 +243,9 @@ module caddy2() {
       color("seagreen")
       hull() {
         // top left 
-        translate([holex-8,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+        translate([holex-8,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
         // top right
-        translate([holex+8,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+        translate([holex+8,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
         // bottom left
         translate([holex-8,reary,baseline]) cube([cubex, 1, th],true);
         // bottom right
@@ -279,9 +280,9 @@ module caddy2() {
     }
     hull() {
       // top left 
-      translate([holex-16,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([holex-16,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
       // top right
-      translate([holex+16,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([holex+16,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
       // bottom left
       translate([holex-16,reary,baseline]) cube([cubex, 1, th],true);
       // bottom right
@@ -391,7 +392,7 @@ module keycaps() {
     for(n = [-1:2]) {
       for(m = [0:5]) {
         translate([m*sepx-sepx/2,fingers[m],-dips[m]])
-           rotate_about_xy(5,0,rot_point2)
+           rotate_about_xy(rot2,0,rot_point2)
            rotate_about_xy(n*rx,0,[0,0,bigR])
              translate([0,0,10])rotate([90,0,0])import("C:/Users/Chris/Documents/DSA 1u.stl");
       }
@@ -417,16 +418,16 @@ union() {
           left=m==0?-edgex:0;
           right=m==6?edgex:0;
           // back right
-          translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+          translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
           // front right
-          translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+          translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
           // back left
-          translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+          translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
           // front left
-          translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+          translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
         }
         if(m<6) { // cut out hole for keycap
-          translate([m*sepx-sepx/2,fingers[m],-dips[m]])rotate_about_xy(5,0,rot_point2)rotate_about_xy(n*rx,0,rotation_point) cube([kw,kd,5],true);
+          translate([m*sepx-sepx/2,fingers[m],-dips[m]])rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(n*rx,0,rotation_point) cube([kw,kd,5],true);
         }
       }
       // vertical supports that go in the Y direction
@@ -434,8 +435,8 @@ union() {
       if(m>5)
       color("wheat")hull() {
         // two bits on the underside of the keyboard plate
-        translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
-        translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor                for thicker walls vvvvv
         translate([m*sepx-gap-vth+edgex,supports[n+1],baseline])cube([2*vth, cubey, th],true); 
         translate([m*sepx-gap-vth+edgex,supports[n+2],baseline])cube([2*vth, cubey, th],true);
@@ -444,8 +445,8 @@ union() {
       if (m<1)
       color("wheat") hull() { //
         // two bits on the underside of the keyboard plate
-        translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
-        translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor
         translate([(m-1)*sepx+gap+vth-edgex,supports[n+1],baseline])cube([2*vth, cubey, th],true); 
         translate([(m-1)*sepx+gap+vth-edgex,supports[n+2],baseline])cube([2*vth, cubey, th],true);
@@ -496,7 +497,7 @@ union() {
       // front right
       translate([(m-1)*sepx+gap-cube2,-2*sepy+thumbs[m],0]) rotate_about_xy(rx-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
       // mid left
-      translate([(m-1)*sepx-gap+cube2,fingers[m-1],-dips[m-1]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([(m-1)*sepx-gap+cube2,fingers[m-1],-dips[m-1]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
       // front left
       translate([(m-1)*sepx-gap+cube2,fingers[0]-3,-dips[3]-frontdip]) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, 1, th],true);
    }
@@ -512,9 +513,9 @@ union() {
     // bit to fill a triangle hole between leftmost thumb, bottom row middle finger, & bottom row ring finger
    color("maroon")hull(){
      // back right
-     translate([(m-1)*sepx+gap,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);      
+     translate([(m-1)*sepx+gap,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);      
      // front left
-      translate([(m-1)*sepx-gap,fingers[m-1],-dips[m-1]])rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([(m-1)*sepx-gap,fingers[m-1],-dips[m-1]])rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // mid right
       translate([(m-1)*sepx+gap,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
    }
@@ -567,8 +568,8 @@ union() {
       color("springgreen")hull() {
         right=m==6?edgex:0;
         // two bits on the underside of the keyboard plate
-        // translate([(m-1)*sepx+gap+vth/2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
-        translate([m*sepx-gap-vth/2+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
+        // translate([(m-1)*sepx+gap+vth/2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
+        translate([m*sepx-gap-vth/2+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
         // two vertices on the floor
         translate([m*sepx-gap-vth/2+right,supports[n+1],baseline])cube([vth, cubey, th],true); 
         // to line
@@ -579,8 +580,8 @@ union() {
       color("springgreen")hull() {
          left=m==0?-edgex:0;
         // two bits on the underside of the keyboard plate
-        // translate([(m-1)*sepx+gap+vth/2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
-        translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        // translate([(m-1)*sepx+gap+vth/2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor
         translate([(m-1)*sepx+gap+vth+left,fronty,baseline])cube([2*vth, cubey, th],true); 
         // to line
@@ -623,8 +624,8 @@ union() {
      translate([m*sepx-gap+cube2,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      translate([m*sepx+gap-cube2,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // finger keys
-     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n3-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
    }
   }
   
@@ -636,13 +637,13 @@ union() {
     for(n = [-1:2]){ // keyboard rows
      color("hotpink")hull() {
        // top right
-      translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom right
-      translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // top left
-      translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
        // bottom left
-      translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+      translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      }
     }
   }
@@ -656,8 +657,8 @@ union() {
      left=m==0?-edgex:0;
      right=m==6?edgex:0;
    // from plate
-     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
    // to add thickness front to back with an added 0.5 here --------------------v
      translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
      translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
@@ -672,8 +673,8 @@ union() {
     if(m<2){
    color("deepskyblue")hull() {
      // from plate
-     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // to add thickness front to back
      translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
      translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
@@ -689,8 +690,8 @@ union() {
   for(m = [3:6]) {
    color("dodgerblue")hull() {
    // from keys plate
-     translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([(m-1)*sepx+gap,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
    // to thumb
      translate([m*sepx-gap,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      translate([(m-1)*sepx+gap,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true); 
@@ -704,14 +705,14 @@ union() {
      left=m==0?-edgex:0;
      right=m==6?edgex:0;
    // from plate
-     translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
 //   // to add thickness
-     translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
    // to line
-     translate([(m-1)*sepx+gap+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([m*sepx-gap+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      
    }
     // extra rear bit that goes down to fixed baseline
@@ -719,9 +720,9 @@ union() {
      left=m==0?-edgex:0;
      right=m==6?edgex:0;
      // top left 
-     translate([(m-1)*sepx+gap+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([(m-1)*sepx+gap+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // top right
-     translate([m*sepx-gap+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // bottom left
      translate([(m-1)*sepx+gap+left,reary,baseline]) cube([cubex, 1, th],true);
      // bottom right
@@ -731,9 +732,9 @@ union() {
      // joiners between palegreen bits at the back
      color("darkseagreen")hull() {
      // top left 
-     translate([m*sepx+gap-cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx+gap-cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // top right
-     translate([m*sepx-gap+cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // bottom left
      translate([m*sepx+gap-cube2,reary,baseline]) cube([cubex, 1, th],true);
      // bottom right
@@ -747,12 +748,12 @@ union() {
     p = m + 1;
    color("teal")hull() {
      // right corner of plate
-     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // left side of front
-     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx+gap-cube2,fingers[p],-dips[p]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      // right side of front
-     translate([m*sepx-gap+cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
-     translate([m*sepx+gap-cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx-gap+cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     translate([m*sepx+gap-cube2,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
    }
   }
   for(m = [0:6]){
@@ -763,20 +764,20 @@ union() {
       if(m>5)
       color("burlywood")hull() {
         // two bits on the underside of the keyboard plate
-        translate([m*sepx-gap-vth+right,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([m*sepx-gap-vth+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor
         translate([m*sepx-gap-vth+right,supports[n+2],baseline])cube([2*vth, cubey, th],true);
         //
-        translate([m*sepx-gap-vth+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([2*vth, cubey, th],true);
+        translate([m*sepx-gap-vth+right,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([2*vth, cubey, th],true);
       }
       if(m<1)
       color("burlywood")hull() {
         // two bits on the underside of the keyboard plate
-        translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(5,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor
         translate([(m-1)*sepx+gap+vth+left,supports[n+2],baseline])cube([2*vth, cubey, th],true);
         //
-        translate([(m-1)*sepx+gap+vth+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(5,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([2*vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth+left,fingers[3]+3,-dips[3]-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([2*vth, cubey, th],true);
       }
     }
   }
