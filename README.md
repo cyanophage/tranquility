@@ -10,7 +10,7 @@ Load the file in openscad. Each side is made of four pieces. Comment out the bit
 
  - Access to a 3d printer. I printed this in PLA at 0.1mm layer height with supports.
  - 2 x elite-c v4
- - 2 x TRRS jack
+ - 2 x PJ340A TRRS jacks
  - 14 x M3 8mm screws
  - 14 x M3 nuts
  - wire
