@@ -10,16 +10,20 @@ gap=1.5; // x width of bits between keys
 mincol = 0; // set this to 1 change the columns to 5. sorry
 columns = 6; // leave this as 6
 nrows = 4; // number of rows
+nthumbs = 4; // number of thumb keys
 fingers = [0,0,15,24,19,19,19]; // controls y adjustment of columns
-thumbs = [0,0,0,0,0,0,0]; 
-dips = [0,0,0,2,1,0,0]; // controls z adjustment of columns"
+thumbs = [0,0,0,0,0,0,0]; // shift the thumb keys back and forward. doesn't really work
+dips = [0,0,0,2,1,0,0]; // controls z adjustment of columns
 
 fronty=-33.5;  // y position of front
-reary=nrows==4?76:58;
+reary=nrows==4?76:58; // y position of the back
+
+bigR = 77;  // controls the radius of the curvature of the top. higher is less curve
+rot2 = 5; // how much the top is tilted forward
+roty = -6;  // tenting angle
 
 supports = [fronty,-10,10,30,reary];
 edgex=2;
-
 
 module rotate_about_xy(x, y, pt) {
   translate(pt)
@@ -41,7 +45,6 @@ module rotate_about_xy_off(x, y, pt,off) {
         children();
 }  
 
-bigR = 77;  // controls the radius of the curvature of the top. higher is less curve
 rx = 2*asin(sepy/(2*bigR));
 ry = 2*asin(sepx/(2*bigR));
 
@@ -57,11 +60,9 @@ reardip=2;  // same at back
 screw=6.1;
 
 rotation_point = [0,0,bigR];
-rot2 = 5; // how much the top is tilted forward
 rot_point2 = [0,-30,2.7]; // the point forward tilt is around
 
 rot_point_y = [-18,0,0];
-roty = -6;  // tenting angle
 
 module elitec() {
   color("green")cube([18.5,33.25,1.00],true);
@@ -503,7 +504,8 @@ union() {
        translate([(m-1)*sepx+gap+left,-2*sepy+thumbs[m],0]) rotate_about_xy(rx-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
      } 
      // key hole
-     translate([m*sepx-sepx/2,-2*sepy+thumbs[m],0]) rotate_about_xy(rx,0,rotation_point) cube([kw,kd,5],true); 
+     if (m>=7-nthumbs)
+       translate([m*sepx-sepx/2,-2*sepy+thumbs[m],0]) rotate_about_xy(rx,0,rotation_point) cube([kw,kd,5],true); 
     }
     // bits to join front of thumb keys to front line
     color("salmon")hull() {
@@ -895,4 +897,3 @@ union() {
 //  caddy2();
   //jack();
 }
-
