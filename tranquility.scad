@@ -7,14 +7,17 @@ th=1.5; // thickness of top
 bth=1; // bottom thickness
 gap=1.5; // x width of bits between keys
 
-columns = 6;
+mincol = 0; // set this to 1 change the columns to 5. sorry
+columns = 6; // leave this as 6
+nrows = 4; // number of rows
 fingers = [0,0,15,24,19,19,19]; // controls y adjustment of columns
 thumbs = [0,0,0,0,0,0,0]; 
 dips = [0,0,0,2,1,0,0]; // controls z adjustment of columns"
 
 fronty=-33.5;  // y position of front
-reary=76;      // y position of rear
-supports = [fronty,-10,10,30,76];
+reary=nrows==4?76:58;
+
+supports = [fronty,-10,10,30,reary];
 edgex=2;
 
 
@@ -23,7 +26,7 @@ module rotate_about_xy(x, y, pt) {
     rotate([x, y, 0])
       translate(-pt)
         children();
-}  
+}
 
 module rotate_about_z(z, pt) {
   translate(pt)
@@ -189,6 +192,7 @@ module caddy1_v4() {
       translate([2.85,0,0]) rotate([90,0,0]) cylinder(d1=3.7,d2=3.7,h=7.35,$fn=32);
       translate([-2.85,0,0]) rotate([90,0,0]) cylinder(d1=3.7,d2=3.7,h=7.35,$fn=32);
     }
+    // surround for usb cable
     color("teal")translate([10,79,-1.95])rotate([90,90,0]) hull() {
       translate([0,2.95,0])cylinder(d1=7.3,d2=7.3,h=3,$fn=64);
       translate([0,-2.95,0])cylinder(d1=7.3,d2=7.3,h=3,$fn=64);
@@ -214,8 +218,9 @@ module caddy1_v4() {
             translate([0,-0.4,1])color("lightblue")cube([21,34.8,1.00],true); // base
             translate([0,-0.4,2.65])color("lightcoral")cube([21,34.8,2.3],true); // base
           }
-          translate([8,-0.4,0]) cube([3,32.8,3], true);
-          translate([-8,-0.4,0]) cube([3,32.8,3], true);
+          // take away bits for pins
+          translate([8,-0.4,0]) cube([3,32.8,9], true);
+          translate([-8,-0.4,0]) cube([3,32.8,9], true);
           translate([0,-15.3,0]) cube([13.1,3,3], true);
         }
         // short walls
@@ -261,12 +266,17 @@ module caddy2() {
   }
 
   translate([holex,68,1.33]) {
-    union(){
-      color("orange") cube([8.4,15,1],true);
-      color("skyblue") translate([0,0,1.1])cube([8.4,15,1.24],true);
-      translate([-3.7,0,-1.5])cube([1,15,4],true);
-      translate([3.7,0,-1.5])cube([1,15,4],true);
-      translate([0,-6.9,-1.5])cube([8,1.2,4],true);
+    difference() {
+      union(){
+        color("orange") cube([8.4,15,1],true);
+        color("skyblue") translate([0,0,1.1])cube([8.4,15,1.24],true);
+        translate([-3.7,0,-1.5])cube([1,15,4],true);
+        translate([3.7,0,-1.5])cube([1,15,4],true);
+        translate([0,-6.9,-1.5])cube([8,1.2,4],true);
+      }
+      // take away slots to leave space for the pins
+      translate([-2.275,-0.5,0]) cube([1.5,11,5],true);
+      translate([2.275,-4.79,0]) cube([1.5,3,5],true);
     }
   }
   difference(){
@@ -300,7 +310,7 @@ module caddy2() {
 module jack() {
   color("darkgray")
   translate([4.75*sepx,68,-1.7]) {
-    rotate([-90,0,0]){
+    rotate([-90,180,0]){
       difference() {
         union(){
           translate([0,0,6])cylinder(d1=5,d2=5,h=2,$fn=64);
@@ -308,6 +318,10 @@ module jack() {
         }
         translate([0,0,-6]) cylinder(d1=3.5,d2=3.5,h=19,$fn=64);
       }
+      translate([-2.275,4,-5.5]) color("silver") cube([0.3,3,1],true);
+      translate([2.275,4,-4.5]) color("silver") cube([0.3,3,1],true);
+      translate([2.275,4,-0.4]) color("silver") cube([0.3,3,1],true);
+      translate([2.275,4,2.9]) color("silver") cube([0.3,3,1],true);
     }
   }
   
@@ -375,22 +389,21 @@ module m3screws() {
 }
 
 module bolts() {
-  bolt(-sepx+4.9,fronty+4.2);
+  bolt(-sepx+4.9+mincol*sepx,fronty+4.2);
   //bolt(6*sepx-4.9,fronty+4.2); 
   
-  bolt(-sepx+4.9,reary-4.2);
+  bolt(-sepx+4.9+mincol*sepx,reary-4.2);
   bolt(6*sepx-4.9,reary-4.2);
   
-  bolt(1.5*sepx,fronty+4.3);
+  bolt(1.5*sepx+mincol*sepx,fronty+4.3);
   bolt(3.5*sepx,reary-4.2);
   bolt(6*sepx-4.9,-5);
   
-  bolt(-sepx+4.9,27);
+  bolt(-sepx+4.9+mincol*sepx,27);
 }
 
 
 module keycaps() {
-  
   union() {
     
     for(n = [-1:2]) {
@@ -414,12 +427,12 @@ module top() {
 difference() {
 union() {
   // 4 x 6 finger keys
-  for (m = [0:6]) { // across the fingers 
+  for (m = [mincol:columns]) { // across the fingers 
     p = m-1;
-    for(n = [-1:2]){ // keyboard rows
+    for(n = [-1:(nrows-2)]){ // keyboard rows
       difference() {
         color("orange")hull() {
-          left=m==0?-edgex:0;
+          left=m==mincol?-edgex:0;
           right=m==6?edgex:0;
           roty_tmp=m==6?0:roty;
           // back right
@@ -440,21 +453,33 @@ union() {
       if(m>5)
       color("wheat")hull() {
         // right side
+        y2=n==-1?-10:30+sepy*(n-1);
+        y3=n==(nrows-2)?reary:30+sepy*n;
         translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         translate([m*sepx-gap-vth+edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor                for thicker walls vvvvv
-        translate([m*sepx-gap-vth+edgex,supports[n+1],baseline])cube([2*vth, cubey, th],true); 
-        translate([m*sepx-gap-vth+edgex,supports[n+2],baseline])cube([2*vth, cubey, th],true);
+        translate([m*sepx-gap-vth+edgex,y2,baseline])cube([2*vth, cubey, th],true); 
+        translate([m*sepx-gap-vth+edgex,y3,baseline])cube([2*vth, cubey, th],true);
       }
       // that sit on the left side of the key plates
-      if (m<1)
+      if (m<=mincol)
       color("wheat") hull() { //
         // left side
-        rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
-        rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
+        y2=n==-1?fronty:30+sepy*(n-1);
+        y3=n==(nrows-2)?reary:30+sepy*n;
+        rotate_about_xy(0,roty,rot_point_y) // tenting
+          translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]])
+            rotate_about_xy(rot2,0,rot_point2) // slight tilt forwards
+              rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) // dishing
+                cube([2*vth, cubey, th],true);
+        rotate_about_xy(0,roty,rot_point_y) // tenting
+          translate([(m-1)*sepx+gap+vth-edgex,fingers[m],-dips[m]])
+            rotate_about_xy(rot2,0,rot_point2) // slight tilt forwards
+              rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) // dishing
+                cube([2*vth, cubey, th],true);
         // two vertices on the floor
-        translate([(m-1)*sepx+gap+vth-edgex,supports[n+1],baseline])cube([2*vth, cubey, th],true); 
-        translate([(m-1)*sepx+gap+vth-edgex,supports[n+2],baseline])cube([2*vth, cubey, th],true);
+        translate([(m-1)*sepx+gap+vth-edgex,y2,baseline]) cube([2*vth, cubey, th],true); 
+        translate([(m-1)*sepx+gap+vth-edgex,y3,baseline]) cube([2*vth, cubey, th],true);
       }
 
 
@@ -466,7 +491,7 @@ union() {
     // thumb keys
     difference(){
      color("plum")hull() {
-       left=m==0?-edgex:0;
+       left=m==mincol?-edgex:0;
        right=m==6?edgex:0;
        // top right
        translate([m*sepx-gap+right,-2*sepy+thumbs[m],0]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
@@ -482,7 +507,7 @@ union() {
     }
     // bits to join front of thumb keys to front line
     color("salmon")hull() {
-       left=m==0?-edgex:0;
+       left=m==mincol?-edgex:0;
        right=m==6?edgex:0;
     // from plate
     // bottom right
@@ -529,7 +554,7 @@ union() {
     // thumb vertical supports
     if(m>5)
      color("limegreen")hull() {
-         left=m==0?-edgex:0;
+         left=m==mincol?-edgex:0;
          right=m==6?edgex:0;
        // top                                                                           2*vth for thicker walls vvvvv
        translate([m*sepx-gap-vth+right,-2*sepy+thumbs[m],-0.3]) rotate_about_xy(rx+rx/2,0,rotation_point) cube([2*vth, cubey, 0.1],true);
@@ -543,9 +568,9 @@ union() {
 
   }
   // connecting front line to baseline
-  for(m=[0:6]) {
+  for(m=[mincol:columns]) {
     color("lightpink")hull() {
-     left=m==0?-edgex:0;
+     left=m==mincol?-edgex:0;
      right=m==6?edgex:0;
       // left
       translate([(m-1)*sepx+gap+left,fingers[0]-3,-frontdip]) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, 1, th],true);
@@ -581,9 +606,9 @@ union() {
         translate([m*sepx-gap-vth/2+right,fingers[0]-3,-frontdip]) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([vth, cubey, th],true);
       }
       // that sit on the left side of the key plates
-      if(m<1)
+      if(m<=mincol)
       color("springgreen")hull() {
-         left=m==0?-edgex:0;
+         left=m==mincol?-edgex:0;
         // two bits on the underside of the keyboard plate
         // translate([(m-1)*sepx+gap+vth/2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([vth, cubey, th],true);
         rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy_off(rx*n-rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
@@ -636,10 +661,10 @@ union() {
   
   
   // joiners between keys
-  for (m = [0:5]) { // across the fingers 
+  for (m = [mincol:5]) { // across the fingers 
     //m = 2;
     p = m+1;
-    for(n = [-1:2]){ // keyboard rows
+    for(n = [-1:(nrows-2)]){ // keyboard rows
      color("hotpink")hull() {
        // top right
       rotate_about_xy(0,roty,rot_point_y)translate([m*sepx-gap+cube2,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n+rx/2,0,rotation_point) cube([cubex, cubey, th],true);
@@ -656,15 +681,17 @@ union() {
   // join front of keys to front line 
   n = -1;
   left = 0;
-  for(m = [0:2]) {
+  for(m = [mincol:2]) {
     p = m + 1;
     color("lightblue") hull() {
-     left=m==0?-edgex:0;
+     left=m==mincol?-edgex:0;
      right=m==6?edgex:0;
    // from plate
      rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) translate([0,0.5,0]) cube([cubex, 1, th],true);
      rotate_about_xy(0,roty,rot_point_y) translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n-rx/2,0,rotation_point) translate([0,0.5,0]) cube([cubex, 1, th],true);
-
+   // to add thickness front to back with an added 0.5 here --------------------v
+//     translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
+//     translate([m*sepx-gap,fingers[m],-dips[m]]) rotate_about_xy(rx*n-rx/2+0.5,0,rotation_point) cube([cubex, cubey, th],true);
      // to line
      //left
      translate([(m-1)*sepx+gap+left,fingers[0]-3,-frontdip]) rotate_about_xy(rx*n-rx/2,0,rotation_point) cube([cubex, 1, th],true);
@@ -704,15 +731,19 @@ union() {
   }
   
   // rear edge joining number row keys to rear border
-  n2 = 3;
-  for(m = [0:6]) {
+  n2 = nrows-1;
+  for(m = [mincol:columns]) {
    color("tomato") hull(){//
-     left=m==0?-edgex:0;
+     left=m==mincol?-edgex:0;
      right=m==6?edgex:0;
      roty_tmp=m==6?0:roty;
    // from plate
-     rotate_about_xy(0,roty_tmp,rot_point_y) translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     rotate_about_xy(0,roty_tmp,rot_point_y) translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+     
      rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2,0,rotation_point) cube([cubex, cubey, th],true);
+//   // to add thickness
+//     rotate_about_xy(0,roty_tmp,rot_point_y) translate([m*sepx-gap+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
+//     rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2)rotate_about_xy(rx*n2-rx/2-0.5,0,rotation_point) cube([cubex, cubey, th],true);
    // to line
      translate([(m-1)*sepx+gap+left,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([cubex, 1, th],true);
      translate([m*sepx-gap+right,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([cubex, 1, th],true);
@@ -720,7 +751,7 @@ union() {
    }
     // extra rear bit that goes down to fixed baseline
    color("palegreen") hull(){
-     left=m==0?-edgex:0;
+     left=m==mincol?-edgex:0;
      right=m==6?edgex:0;
      // top left 
      translate([(m-1)*sepx+gap+left,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([cubex, 1, th],true);
@@ -747,7 +778,7 @@ union() {
   }
     
   // joiners between rear edge tomato bits
-  for(m = [0:5]) {
+  for(m = [mincol:5]) {
     p = m + 1;
    color("teal")hull() {
      // right corner of plate
@@ -759,27 +790,27 @@ union() {
      translate([m*sepx+gap-cube2,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([cubex, 1, th],true);
    }
   }
-  for(m = [0:6]){
+  for(m = [mincol:columns]){
     // that sit on the left side of the key plates
-    for(n=[2:2]) {
-     left=m==0?-edgex:0;
+    for(n=[(nrows-2):(nrows-2)]) {
+     left=m==mincol?-edgex:0;
      right=m==6?edgex:0;
       if(m>5)
       color("burlywood")hull() {
         // two bits on the underside of the keyboard plate
-        translate([m*sepx-gap-vth+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
-        // two vertices on the floor
-        translate([m*sepx-gap-vth+right,supports[n+2],baseline])cube([2*vth, cubey, th],true);
-        //
-        translate([m*sepx-gap+right-vth,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([2*vth, 1, th],true);
+        translate([m*sepx-gap-vth+right,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true); // joins the tomato it and orange bit
+        // vertex on the floor
+        translate([m*sepx-gap-vth+right,reary,baseline])cube([2*vth, cubey, th],true);
+        
+        translate([m*sepx-gap+right-vth,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([2*vth, 1, th],true); // vertex at the back meeting tomato and springgreen
       }
-      if(m<1)
+      if(m<=mincol)
       color("burlywood") hull(){
         // two bits on the underside of the keyboard plate
         rotate_about_xy(0,roty,rot_point_y) translate([(m-1)*sepx+gap+vth+left,fingers[m],-dips[m]]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy_off(rx*n+rx/2,0,rotation_point,[0,0,-1]) cube([2*vth, cubey, th],true);
         // two vertices on the floor
-        translate([(m-1)*sepx+gap+vth+left,supports[n+2],baseline])cube([2*vth, cubey, th],true);
-        //
+        translate([(m-1)*sepx+gap+vth+left,reary,baseline])cube([2*vth, cubey, th],true);
+        
         translate([(m-1)*sepx+gap+vth+left,fingers[3]+3,-reardip]) rotate_about_xy(rot2,0,rot_point2) rotate_about_xy(rx*n2-rx/2,0,rotation_point) rotate([-30,0,0]) cube([2*vth, 1, th],true);
       }
     }
@@ -790,9 +821,9 @@ union() {
   // take this stuff away from the rest
     union() {
       // square gap for caddy
-      translate([10,17.2+58+1,-3.5+1.75-0.5]) cube([21,5,11],true); // elite-c
+      translate([10+mincol*sepx,reary,-3.5+1.75-0.5]) cube([21,10,11],true); // elite-c
       // square gap for trrs jack
-      translate([4.75*sepx,17.2+58+1,-3.5+1.75-0.5]) cube([11,5,11],true); // trrs jack
+      translate([4.75*sepx,reary,-3.5+1.75-0.5]) cube([11,10,11],true); // trrs jack
     }
 
   }
@@ -842,12 +873,16 @@ module wristrest() {
 
 // add mirror for right hand
 //mirror(v=[1,0,0])
+//projection()
 union() {
   union() {
-    top();
+    //intersection(){
+       //translate([50,20,-6])#cube([200,200,10],true);
+      top();
+    //}
     bolts();
   }
-//  bottom();
+  //bottom();
 //  m3screws();
   //wristrest();
     
@@ -857,7 +892,7 @@ union() {
   //translate([10,58,-0.8]) rotate([0,180,0]) elitec4();
   //caddy1_v4();
   
-  //caddy2();
+//  caddy2();
   //jack();
 }
 
